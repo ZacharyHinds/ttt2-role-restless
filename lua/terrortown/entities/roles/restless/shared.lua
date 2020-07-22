@@ -1,7 +1,7 @@
 if SERVER then
   AddCSLuaFile()
 	resource.AddFile("materials/vgui/ttt/dynamic/roles/icon_rst.vmt")
-	-- resource.AddFile("materials/vgui/ttt/dynamic/roles/icon_rst.vmt")
+
 end
 
 roles.InitCustomTeam(ROLE.name, {
@@ -26,4 +26,8 @@ function ROLE:PreInitialize()
     minPlayers = 6,
     togglable = true
   }
+end
+
+function ROLE:Initialize()
+  if SERVER and JESTER then self.networkRoles = {JESTER} end
 end
