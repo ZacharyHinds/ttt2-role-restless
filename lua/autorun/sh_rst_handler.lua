@@ -1,7 +1,6 @@
 if SERVER then
-  hook.Add("PostPlayerDeath", "RestlessKilled", function(ply)
+  hook.Add("TTT2PostPlayerDeath", "RestlessKilled", function(ply, _, attacker)
     if not IsValid(ply) or ply:GetSubRole() ~= ROLE_RESTLESS then return end
-    local attacker = ply.targetAttacker
     if IsValid(attacker) and attacker:IsPlayer() then
       if attacker:GetSubRole() == ROLE_INFECTED then
         return
