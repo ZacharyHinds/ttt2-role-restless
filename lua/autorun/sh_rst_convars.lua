@@ -5,7 +5,7 @@ CreateConVar("ttt2_rst_lives", 6, {FCVAR_NOTIFY, FCVAR_ARCHIVE, FCVAR_REPLICATED
 CreateConVar("ttt2_rst_min_dmg", 0.5, {FCVAR_NOTIFY, FCVAR_ARCHIVE})
 CreateConVar("ttt2_rst_min_health", 5, {FCVAR_NOTIFY, FCVAR_ARCHIVE})
 CreateConVar("ttt2_rst_dmg_penalty", 0.05, {FCVAR_NOTIFY, FCVAR_ARCHIVE, FCVAR_REPLICATED})
-CreateConVar("ttt2_rst_base_delay", 1, {FCVAR_NOTIFY, FCVAR_ARCHIVE})
+CreateConVar("ttt2_rst_base_delay", 2, {FCVAR_NOTIFY, FCVAR_ARCHIVE})
 
 if CLIENT then
   hook.Add("TTT2FinishedLoading", "mes_devicon", function() -- addon developer emblem for me ^_^
@@ -75,6 +75,6 @@ hook.Add("TTTUlxDynamicRCVars", "ttt2_ulx_dynamic_rst_convars", function(tbl)
     slider = true,
     min = 0,
     max = 5,
-    desc = "ttt2_rst_base_delay (def. 1)"
+    desc = "ttt2_rst_base_delay (def. 2)"
   })
 end)
