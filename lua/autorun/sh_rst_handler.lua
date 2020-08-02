@@ -9,15 +9,22 @@ if SERVER then
     ply:SetNWInt("rst_death_count", ply:GetNWInt("rst_death_count", 0) + 1)
 
     local death_count = ply:GetNWInt("rst_death_count", 0)
+    print(ply:Nick() .. "'s Death Count: " .. death_count)
     if death_count > GetConVar("ttt2_rst_lives"):GetInt() then return end
+    local spawn_delay = GetConVar("ttt2_rst_base_delay"):GetFloat()
+    if GetConVar("ttt2_rst_delay_mode"):GetInt() == 0 then
+      spawn_delay = spawn_delay * death_count
+      print("Spawn Delay: " .. spawn_delay)
+    else
+      spawn_delay = spawn_delay ^ death_count
+      print("Spawn Delay: " .. spawn_delay)
+    end
 
-    local spawn_delay = GetConVar("ttt2_rst_base_delay"):GetInt() * death_count
     local spawnpoint = spawn.GetRandomPlayerSpawnEntity(ply)
     local doWorldSpawn = GetConVar("ttt2_rst_worldspawn"):GetBool()
     local rst_health = 100 - (GetConVar("ttt2_rst_health_multi"):GetInt() * death_count)
 
     if rst_health < GetConVar("ttt2_rst_min_health"):GetInt() then rst_health = GetConVar("ttt2_rst_min_health"):GetInt() end
-
 
     ply:Revive(
       spawn_delay,
