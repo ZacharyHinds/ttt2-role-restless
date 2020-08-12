@@ -37,7 +37,7 @@ if SERVER then
       end,
       nil,
       GetConVar("ttt2_rst_need_corpse"):GetBool(),
-      false
+      GetConVar("ttt2_rst_block_round"):GetBool()
     )
     if death_count ~= GetConVar("ttt2_rst_lives"):GetInt() then
       ply:SendRevivalReason("restless_reviving", {lives = GetConVar("ttt2_rst_lives"):GetInt() - death_count})
