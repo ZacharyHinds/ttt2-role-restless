@@ -1,11 +1,7 @@
 if SERVER then
   hook.Add("TTT2PostPlayerDeath", "RestlessKilled", function(ply, _, attacker)
     if not IsValid(ply) or ply:GetSubRole() ~= ROLE_RESTLESS then return end
-    if IsValid(attacker) and attacker:IsPlayer() then
-      if attacker:GetSubRole() == ROLE_INFECTED then
-        return
-      end
-    end
+    if IsValid(attacker) and attacker:IsPlayer() and attacker:GetSubRole() == ROLE_INFECTED then return end
     ply:SetNWInt("rst_death_count", ply:GetNWInt("rst_death_count", 0) + 1)
 
     local death_count = ply:GetNWInt("rst_death_count", 0)
@@ -23,14 +19,27 @@ if SERVER then
     local spawnpoint = spawn.GetRandomPlayerSpawnEntity(ply)
     local doWorldSpawn = GetConVar("ttt2_rst_worldspawn"):GetBool()
     local rst_health = 100 - (GetConVar("ttt2_rst_health_multi"):GetInt() * death_count)
+    local spawnpoint_cost = GetConVar("ttt2_rst_spawn_cost"):GetInt()
 
     if rst_health < GetConVar("ttt2_rst_min_health"):GetInt() then rst_health = GetConVar("ttt2_rst_min_health"):GetInt() end
 
     ply:Revive(
       spawn_delay,
       function()
-        if doWorldSpawn and spawnpoint then
+        -- hook.Add("KeyPress", "TTT2RestlessBuyWorldSpawn", function(pl, key)
+        --   if ply ~= pl or pl:Alive() then return end
+        --   if death_count >= GetConVar("ttt2_rst_lives"):GetInt() then return end
+        --   if key == IN_RELOAD then
+        --     doWorldSpawn = true
+        --     ply:SetNWInt("rst_death_count", death_count + 1)
+        --   end
+        -- end)
+        if (doWorldSpawn or ply.rstBuyWorldSpawn) and spawnpoint then
           ply:SetPos(spawnpoint:GetPos())
+          if ply.rstBuyWorldSpawn then
+            ply:SetNWInt("rst_death_count", death_count + spawnpoint_cost)
+            ply.rstBuyWorldSpawn = false
+          end
         end
         ply:SetHealth(rst_health)
         ply:SetMaxHealth(rst_health)
@@ -39,26 +48,31 @@ if SERVER then
       GetConVar("ttt2_rst_need_corpse"):GetBool(),
       GetConVar("ttt2_rst_block_round"):GetBool()
     )
-    if death_count ~= GetConVar("ttt2_rst_lives"):GetInt() then
-      ply:SendRevivalReason("restless_reviving", {lives = GetConVar("ttt2_rst_lives"):GetInt() - death_count})
-    else
+    local lives = GetConVar("ttt2_rst_lives"):GetInt() - death_count
+    if lives - spawnpoint_cost < 0 and lives > 0 and not doWorldSpawn then
+      ply:SendRevivalReason("restless_reviving", {lives = lives})
+    elseif lives == 0 then
       ply:SendRevivalReason("restless_final_life")
+    elseif not doWorldSpawn then
+      ply:SendRevivalReason("restless_reviving_can_buy", {lives = lives, cost = GetConVar("ttt2_rst_spawn_cost"):GetInt()})
+    else
+      ply:SendRevivalReason("restless_reviving_worldspawn", {lives = lives})
     end
   end)
 
-  hook.Add("TTTBeginRound", "RestlessDeathReset", function(ply)
+  hook.Add("TTTBeginRound", "RestlessDeathReset", function()
     for _, ply in ipairs(player.GetAll()) do
       ply:SetNWInt("rst_death_count", nil)
     end
   end)
 
-  hook.Add("TTTEndRound", "RestlessDeathReset", function(ply)
+  hook.Add("TTTEndRound", "RestlessDeathReset", function()
     for _, ply in ipairs(player.GetAll()) do
       ply:SetNWInt("rst_death_count", nil)
     end
   end)
 
-  hook.Add("TTTPrepRound", "RestlessDeathReset", function(ply)
+  hook.Add("TTTPrepRound", "RestlessDeathReset", function()
     for _, ply in ipairs(player.GetAll()) do
       ply:SetNWInt("rst_death_count", nil)
     end
@@ -80,6 +94,23 @@ if SERVER then
 
     print(attacker:Nick() .. "'s Damage Penalty: " .. (1 - damage_penalty))
     dmginfo:ScaleDamage(1 - damage_penalty)
+  end)
+
+  hook.Add("KeyPress", "TTT2RestlessBuyWorldSpawn", function(ply, key)
+    if ply:GetSubRole() ~= ROLE_RESTLESS then return end
+    local lives = GetConVar("ttt2_rst_lives"):GetInt() - ply:GetNWInt("rst_death_count")
+    local cost = GetConVar("ttt2_rst_spawn_cost"):GetInt()
+    if ply:Alive() or lives <= 0 then return end
+    if lives - cost < 0 then return end
+    if not ply.isReviving then return end
+    if ply.rstBuyWorldSpawn then return end
+    if key ~= IN_RELOAD then return end
+    ply.rstBuyWorldSpawn = true
+    if lives - cost == 0 then
+      ply:SendRevivalReason("restless_final_life")
+    else
+      ply:SendRevivalReason("restless_reviving_worldspawn", {lives = lives - cost})
+    end
   end)
 end
 

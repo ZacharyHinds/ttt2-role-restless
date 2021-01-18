@@ -13,3 +13,5 @@ L["ttt2_desc_" .. RESTLESS.name] = [[Restless is a neutral killer who keeps comi
 L["restless_reviving"] = "You have {lives} lives remaining!"
 L["restless_final_life"] = "This is your final life!"
 L["ttt2_rst_target_mult"] = "You deal {multiplier}x damage!"
+L["restless_reviving_can_buy"] = "You have {lives} lives remaining! Press Reload to respawn at a map spawnpoint at the cost of {cost} life."
+L["restless_reviving_worldspawn"] = "You have {lives} lives remaining! You will respawn at a map spawnpoint"

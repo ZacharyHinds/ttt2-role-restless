@@ -8,6 +8,7 @@ CreateConVar("ttt2_rst_dmg_penalty", 0.05, {FCVAR_NOTIFY, FCVAR_ARCHIVE, FCVAR_R
 CreateConVar("ttt2_rst_base_delay", 2, {FCVAR_NOTIFY, FCVAR_ARCHIVE})
 CreateConVar("ttt2_rst_delay_mode", 0, {FCVAR_NOTIFY, FCVAR_ARCHIVE})
 CreateConVar("ttt2_rst_block_round", 0, {FCVAR_NOTIFY, FCVAR_ARCHIVE})
+CreateConVar("ttt2_rst_spawn_cost", 1, {FCVAR_NOTIFY, FCVAR_ARCHIVE})
 
 if CLIENT then
   hook.Add("TTT2FinishedLoading", "mes_devicon", function() -- addon developer emblem for me ^_^
@@ -96,5 +97,13 @@ hook.Add("TTTUlxDynamicRCVars", "ttt2_ulx_dynamic_rst_convars", function(tbl)
       },
       numStart = 0,
       desc = "ttt2_rst_delay_mode (def. 0)"
+  })
+
+  table.insert(tbl[ROLE_RESTLESS], {
+    cvar = "ttt2_rst_spawn_cost",
+    slider = true,
+    min = 0,
+    max = 5,
+    desc = "ttt2_rst_spawn_cost (def. 1)"
   })
 end)

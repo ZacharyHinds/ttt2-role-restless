@@ -13,3 +13,5 @@ L["ttt2_desc_" .. RESTLESS.name] = [[Беспокойный - нейтральн
 L["restless_reviving"] = "У вас есть {lives} оставшихся жизней!"
 L["restless_final_life"] = "Это ваша последняя жизнь!"
 L["ttt2_rst_target_mult"] = "Вы наносите {multiplier}x урона!"
+-- L["restless_reviving_can_buy"] = "You have {lives} lives remaining! Press Reload to respawn at a map spawnpoint at the cost of {cost} life."
+-- L["restless_reviving_worldspawn"] = "You have {lives} lives remaining! You will respawn at a map spawnpoint"

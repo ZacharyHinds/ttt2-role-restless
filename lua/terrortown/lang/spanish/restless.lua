@@ -13,3 +13,5 @@ L["ttt2_desc_" .. RESTLESS.name] = [[¡El Renacido es un rol neutral que siempre
 L["restless_reviving"] = "Tienes {lives} vidas restantes."
 L["restless_final_life"] = "¡Esta es tu última vida!"
 L["ttt2_rst_target_mult"] = "Haces {multiplier}x de daño."
+-- L["restless_reviving_can_buy"] = "You have {lives} lives remaining! Press Reload to respawn at a map spawnpoint at the cost of {cost} life."
+-- L["restless_reviving_worldspawn"] = "You have {lives} lives remaining! You will respawn at a map spawnpoint"
