@@ -44,7 +44,9 @@ if SERVER then
         ply:SetHealth(rst_health)
         ply:SetMaxHealth(rst_health)
       end,
-      nil,
+      function()
+        return ply:GetSubRole() == ROLE_RESTLESS
+      end,
       GetConVar("ttt2_rst_need_corpse"):GetBool(),
       GetConVar("ttt2_rst_block_round"):GetBool()
     )
