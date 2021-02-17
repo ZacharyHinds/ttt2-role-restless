@@ -1,4 +1,4 @@
-L = LANG.GetLanguageTableReference("english")
+L = LANG.GetLanguageTableReference("en")
 
 L[RESTLESS.name] = "Restless"
 L[RESTLESS.defaultTeam] = "TEAM Restless"

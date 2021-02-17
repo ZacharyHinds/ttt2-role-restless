@@ -1,4 +1,4 @@
-L = LANG.GetLanguageTableReference("Русский")
+L = LANG.GetLanguageTableReference("ru")
 
 L[RESTLESS.name] = "Беспокойный"
 L[RESTLESS.defaultTeam] = "Команда беспокойных"
