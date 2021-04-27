@@ -34,6 +34,7 @@ if SERVER then
         --     ply:SetNWInt("rst_death_count", death_count + 1)
         --   end
         -- end)
+        events.Trigger(EVENT_RST_REVIVE, ply, death_count, ply.rstBuyWorldSpawn)
         if (doWorldSpawn or ply.rstBuyWorldSpawn) and spawnpoint then
           ply:SetPos(spawnpoint:GetPos())
           if ply.rstBuyWorldSpawn then

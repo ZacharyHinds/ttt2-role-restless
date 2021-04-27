@@ -15,3 +15,8 @@ L["restless_final_life"] = "This is your final life!"
 L["ttt2_rst_target_mult"] = "You deal {multiplier}x damage!"
 L["restless_reviving_can_buy"] = "You have {lives} lives remaining! Press Reload to respawn at a map spawnpoint at the cost of {cost} life."
 L["restless_reviving_worldspawn"] = "You have {lives} lives remaining! You will respawn at a map spawnpoint"
+
+--EVENT STRINGS
+L["title_rst_revive"] = "A Restless respawned."
+L["desc_rst_revive"] = "{restless} respawned with {lives}/{max} lives."
+L["desc_rst_revive_worldspawn"] = "They sacrificed {cost} lives to respawn at a spawnpoint."
