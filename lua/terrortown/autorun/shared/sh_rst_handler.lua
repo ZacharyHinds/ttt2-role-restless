@@ -16,7 +16,7 @@ if SERVER then
       print("Spawn Delay: " .. spawn_delay)
     end
 
-    local spawnpoint = spawn.GetRandomPlayerSpawnEntity(ply)
+    local spawnpoint = plyspawn.GetRandomPlayerSpawnEntity(ply)
     local doWorldSpawn = GetConVar("ttt2_rst_worldspawn"):GetBool()
     local rst_health = 100 - (GetConVar("ttt2_rst_health_multi"):GetInt() * death_count)
     local spawnpoint_cost = GetConVar("ttt2_rst_spawn_cost"):GetInt()
