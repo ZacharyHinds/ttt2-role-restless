@@ -16,7 +16,7 @@ if SERVER then
       print("Spawn Delay: " .. spawn_delay)
     end
 
-    local spawnpoint = plyspawn.GetRandomPlayerSpawnEntity(ply)
+    local spawnpoint = plyspawn.GetRandomSafePlayerSpawnPoint(ply)
     local doWorldSpawn = GetConVar("ttt2_rst_worldspawn"):GetBool()
     local rst_health = 100 - (GetConVar("ttt2_rst_health_multi"):GetInt() * death_count)
     local spawnpoint_cost = GetConVar("ttt2_rst_spawn_cost"):GetInt()
@@ -36,7 +36,7 @@ if SERVER then
         -- end)
         events.Trigger(EVENT_RST_REVIVE, ply, death_count, ply.rstBuyWorldSpawn)
         if (doWorldSpawn or ply.rstBuyWorldSpawn) and spawnpoint then
-          ply:SetPos(spawnpoint:GetPos())
+          ply:SetPos(spawnpoint.pos)
           if ply.rstBuyWorldSpawn then
             ply:SetNWInt("rst_death_count", death_count + spawnpoint_cost)
             ply.rstBuyWorldSpawn = false
