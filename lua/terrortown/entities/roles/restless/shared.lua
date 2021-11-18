@@ -17,6 +17,8 @@ function ROLE:PreInitialize()
   self.scoreKillsMultiplier = 5
   self.scoreTeamKillsMultiplier = -16
 
+  self.isOmniscientRole = true
+
   self.defaultEquipment = SPECIAL_EQUIPMENT
   self.defaultTeam = TEAM_RESTLESS
 
