@@ -20,3 +20,16 @@ L["restless_reviving_worldspawn"] = "You have {lives} lives remaining! You will 
 L["title_rst_revive"] = "A Restless respawned."
 L["desc_rst_revive"] = "{restless} respawned with {lives}/{max} lives."
 L["desc_rst_revive_worldspawn"] = "They sacrificed {cost} lives to respawn at a spawnpoint."
+
+--SETTING STRINGS
+L["label_ttt2_rst_worldspawn"] = "Always respawns at spawnpoint (instead of at their body)"
+L["label_ttt2_rst_need_corpse"] = "Require their body to respawn"
+L["label_ttt2_rst_block_round"] = "Block round end while respawning"
+L["label_ttt2_rst_delay_mode"] = "Exponential respawn delay"
+L["label_ttt2_rst_health_multi"] = "Health reduction per death"
+L["label_ttt2_rst_min_health"] = "Minimum health"
+L["label_ttt2_rst_lives"] = "Number of lives"
+L["label_ttt2_rst_dmg_penalty"] = "Damage penalty per death"
+L["label_ttt2_rst_min_dmg"] = "Minimum damage"
+L["label_ttt2_rst_base_delay"] = "Base respawn delay"
+L["label_ttt2_rst_spawn_cost"] = "Live cost to change spawn point"
